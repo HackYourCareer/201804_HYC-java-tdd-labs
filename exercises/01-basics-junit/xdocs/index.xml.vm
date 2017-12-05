@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <properties>
+        <title>Introduction</title>
+    </properties>
+
+    <body>
+        <section name="Introduction">
+            <p>
+                JUnit is the most popular test framework in the Java world. It is an instance of the
+                <a href="https://en.wikipedia.org/wiki/XUnit">xUnit</a> architecture for unit testing frameworks.
+            </p>
+            <p>
+                During this workshop you will use JUnit 4. It allows you to configure tests, runners and other
+                elements by annotations. Thanks to that code is more clear, readable and without redundancy.
+            </p>
+            <p>
+                For more information, please visit:
+            </p>
+            <ul>
+                <li><a href="http://junit.org/junit4/">JUnit 4</a></li>
+                <li><a href="https://github.com/junit-team/junit4/wiki">JUnit 4 Wiki</a></li>
+                <li><a href="https://github.com/junit-team/junit4/wiki/Download-and-Install">Download and Install guide</a></li>
+                <li><a href="https://github.com/junit-team/junit4/wiki/Getting-started">Getting Started</a></li>
+            </ul>
+        </section>
+        <section name="Exercise">
+            <p>
+               In this part of the workshop you will add tests for <code>RangedCalculator</code> class. Please be noticed
+               that this class is not well designed. We use some "uncommon" constructions to allow you learn
+               more JUnit features. You should start by opening the <code>RangedCalculatorTest.java</code> file.
+            </p>
+        </section>
+        <section name="JUnit Basics">
+            <p>Let's say we have a <code>Calculator</code> class which should be tested:</p>
+            <pre>public class Calculator {
+
+    public Integer add(Integer arg1, Integer arg2) {
+        // logic is here
+    }
+}</pre>
+            <p>Now you have to add a new class with the same name and <code>Test</code> suffix:</p>
+            <pre>public class CalculatorTest {
+
+    // all tests will be here
+}</pre>
+            <p>Every method used as a test must be:</p>
+            <ul>
+                <li><code>public</code></li>
+                <li>not <code>static</code></li>
+                <li>returns <code>void</code></li>
+                <li>take zero parameters</li>
+                <li>annotated with <code>org.junit.Test</code></li>
+            </ul>
+            <pre>import org.junit.Test;
+
+public class CalculatorTest {
+
+    @Test
+    public void add() {
+        // given
+        final Calculator calculator = new Calculator();
+
+        // when
+        final Integer result = calculator.add(2, 5);
+
+        // then
+        // assertions here
+    }
+}</pre>
+            <p>
+                To verify test result you have to add at least one JUnit assertion. To do that you can use
+                methods defined in <code>org.junit.Assert</code> class:
+            </p>
+            <pre>import org.junit.Assert;
+import org.junit.Test;
+
+public class CalculatorTest {
+
+    @Test
+    public void add() {
+        // given
+        final Calculator calculator = new Calculator();
+
+        // when
+        final Integer result = calculator.add(2, 5);
+
+        // then
+        Assert.assertNotNull(result);
+        Assert.assertEquals(7, result.intValue()); 
+    }
+}</pre>
+            <p>
+                For better readability you can use static imports (recommended by us) and add messages
+                to the assertions (not recommended by us):
+            </p>
+            <pre>import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import org.junit.Test;
+
+public class CalculatorTest {
+
+    @Test
+    public void add() {
+        // given
+        final Calculator calculator = new Calculator();
+
+        // when
+        final Integer result = calculator.add(2, 5);
+
+        // then
+        assertNotNull("result is null", result);
+        assertEquals("result should be equal to 7 (2 + 5 = 7)", 7, result); 
+    }
+}</pre>
+            <p>
+                If an expected result of a test is to throw an exception, then you should set an
+                <code>expected</code> parameter in the <code>@Test</code>:
+            </p>
+            <pre>// imports
+
+public class CalculatorTest {
+
+    // ...
+
+    @Test(expected = IllegalArgumentException.class)
+    public void addWhenBothAreNull() {
+        // given
+        final Calculator calculator = new Calculator();
+
+        // when
+        calculator.add(null, null);
+    }
+}</pre>
+            <p>
+                If you need to prepare some data before tests and do some cleanup after,
+                then you can configure it by <code>org.junit.Before</code> and <code>org.junit.After</code>
+                annotations.
+            </p>
+            <pre>// imports
+
+public class PlayerTest {
+
+    private MusicAnalyser analyser;
+
+    @Before
+    public void setup() {
+        analyser = new MusicAnalyser();
+        analyser.on();
+    }
+
+    @After
+    public void cleanup() {
+        analyser.off();
+    }
+
+    @Test
+    public void analyse() {
+        // given
+        final Track track = new Track("hybris-anthem.mp3");
+
+        // when
+        // analyser is created and turned on
+        final Quality result = analyser.analyse(track);
+
+        // given
+        assertEquals(Quality.THE_BEST, result);
+        // after this line analyser will be turned off
+    }
+}</pre>
+            <p>
+                Instance variables defined in test classes are shared by all tests, so you should not modify those objects
+                if they are not set again before next test. There is no warranty for the order of the tests.
+            </p>
+        </section>
+    </body>
+</document>

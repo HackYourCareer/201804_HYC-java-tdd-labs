@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <properties>
+        <title>Introduction</title>
+    </properties>
+
+    <body>
+        <section name="Introduction">
+            <p>
+            	In this exercise you will develop three parts of the shopping application:
+            </p>
+            <ul>
+                <li>user cart which stores products for eventual purchase</li>
+                <li>promotions which count a discount for cart</li>
+                <li>a mechanism that determines the total price of the cart</li>
+            </ul>
+        </section>
+        <section name="Exercise">
+            <p>
+                We provide only <code>Product</code> and some subclasses (<code>Beer</code>,
+                <code>Chips</code>, <code>SaltySticks</code> and <code>Wine</code>)
+                to allow you to fully use TDD (define interfaces, create classes etc.).
+                You should start by opening the <code>package-info.java</code> file.
+            </p>
+        </section>
+    </body>
+</document>

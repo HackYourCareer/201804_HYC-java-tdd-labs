@@ -1,0 +1,14 @@
+language: java
+script:
+  - cd exercises/01-basics-junit
+  - mvn -e clean install site
+  - cd ../02-basics-assertj
+  - mvn -e clean install site
+  - cd ../03-basics-mockito
+  - mvn -e clean install site
+  - cd ../04-shop-console
+  - mvn -e clean install site
+  - cd ../05-shop-web
+  - mvn -e clean install site
+jdk:
+  - oraclejdk8

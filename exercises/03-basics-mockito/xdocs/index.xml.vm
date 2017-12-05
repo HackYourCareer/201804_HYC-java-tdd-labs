@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <properties>
+        <title>Introduction</title>
+    </properties>
+
+    <body>
+        <section name="Introduction">
+            <p>
+                Mockito is a mocking framework for unit tests in Java. It lets you write tests with a clean and simple API.
+            </p>
+            <p>During this workshop you will user Mockito 2.X</p>
+            <p>
+                For more information, please visit:
+            </p>
+            <ul>
+                <li>
+                    <a href="http://site.mockito.org/">Mockito web page</a>
+                </li>
+                <li>
+                    <a href="https://github.com/mockito/mockito/wiki">Mockito on github</a>
+                </li>
+            </ul>
+        </section>
+        <section name="Exercise">
+            <p>
+                In this exercise you will test <code>DefaultCommentFacade</code> class. It uses:
+            </p>
+            <ul>
+                <li>UserService - to obtain current user</li>
+                <li>PerrsmisionService - to find out if user has permission to read/create comments</li>
+                <li>CommentService - to create and persist comments</li>
+            </ul>
+            <p>
+                A start point is <code>DefaultCommentFacadeTest.java</code> file.
+            </p>
+        </section>
+        <section name="Mockito Basics">
+            <p>Mockito allows you to create mocks programmatically:</p>
+            <pre>UserService userServiceMock = Mockito.mock(UserService.class);</pre>
+            <p>or with annotations:</p>
+            <pre>@Mock
+private UserService userServiceMock;</pre>
+            <p>
+                You can also use partial mock called spy. It is like real object but you can still stub some behaviour.
+                But don't overuse this!!!
+            </p>
+            <pre>UserService userServiceSpy = Mockito.spy(UserService.class);
+UserService userServiceSpy = Mockito.spy(new DefaultUserService());
+
+@Spy
+UserService userServiceSpy;</pre>
+            <p>When you create a mock by annotations you can inject it to a tested class with annotations:</p>
+            <pre>@InjectMocks
+private ClassUnderTest underTest;</pre>
+            <p>It is done automatically when you use <code>MockitoJUnitTestRunner</code>:</p>
+            <pre>@RunWith(MockitoJUnitRunner.class)
+public class DefaultCommentFacadeTest {
+    // implementation here
+}</pre>
+            <p>or you can do it by yourself:</p>
+            <pre>@Before
+public void setup() {
+    MockitoAnnotations.initMocks(this);
+}</pre>
+            <p>Of course you can create an object under test by hand and don't use injection mechanism at all.</p>
+            <h3>Stubbing methods</h3>
+            <p>When a mock is created, then you can define its behaviour:</p>
+            <pre>CommentModel commentMock = mock(CommentModel.class);
+CommentService commentServiceMock = mock(CommentService.class);
+when(commentServiceMock.createComment(anyString())).thenReturn(commentMock);</pre>
+            <p>
+                Now after calling <code>commentServiceMock.createComment("another string")</code>
+                it will return the <code>commentMock</code>.
+                <code>anyString()</code> is an argument matcher (see: <code>org.mockito.ArgumentMatchers</code>)
+                which substitutes any string. You can also use a specific argument:
+            </p>
+            <pre>CommentModel commentMock = mock(CommentModel.class);
+CommentService commentServiceMock = mock(CommentService.class);
+when(commentServiceMock.createComment("some string")).thenReturn(commentMock);</pre>
+            <p>
+                In this example calling <code>commentServiceMock.createComment("another string")</code> will return <code>null</code>.
+                You can stub method to do more complex operations by using instances of the <code>org.mockito.stubbing.Answer</code>.
+            </p>
+            <p>
+                For more examples check here:
+                <a href="https://site.mockito.org/mockito/docs/current/org/mockito/Mockito.html">Mockito examples and documentation</a>.
+            </p>
+            <h3>Verification</h3>
+            <p>
+                Mocks allows you to check if some interaction have happened. Let's assume that the <code>CommentFacade</code>
+                to add a new comment will use a <code>CommentService#addComment(Model,CommentModel)</code> method.
+                In your test you want to check if a call of this method happened. You can do it like this:
+            </p>
+            <pre>CommentService commentServiceMock = mock(CommentService.class);
+CommentFacade commentFacadeUnderTest = new DefaultCommentFacade(commentServiceMock);
+commentFacadeUnderTest.addComment(any(), any());
+
+verify(commentServiceMock).addComment(any(), any());</pre>
+            <p>
+                This will check if the <code>addComment</code> method was called once.
+                <code>verify</code> method allows you to check not only for one invocation, but it has many variants:
+            </p>
+            <pre>verify(mockedObject, times(3));
+verify(mockedObject, never());
+verify(mockedObject, atLeast(3));
+verify(mockedObject, atMost(3));</pre>
+            <h3>Argument captor</h3>
+            <p>
+                If you need to add some assertions to parameters which method was called you can use an
+                <code>org.mockito.ArgumentCaptor</code> class:
+            </p>
+            <pre>CommentService commentServiceMock = mock(CommentService.class);
+CommentFacade commentFacadeUnderTest = new DefaultCommentFacade(commentServiceMock);
+commentFacadeUnderTest.addComment(mock(Model.class), "some string");
+
+ArgumentCaptor&lt;String&gt; stringCaptor = ArgumentCaptor.forClass(String.class);
+verify(commentServiceMock).createComment(stringCaptor.capture());
+asserThat(stringCaptor.getValue()).isEqualTo("some string");</pre>
+        </section>
+    </body>
+</document>

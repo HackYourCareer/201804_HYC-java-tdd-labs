@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.sap.hybris.tdd.labs</groupId>
+    <artifactId>01-basics-junit</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>JUnit Basics</name>
+    <description>Teaches the usage of JUnit 4 test framework</description>
+    <url>${basedir}</url>
+
+    <inceptionYear>2017</inceptionYear>
+    <organization>
+        <name>SAP Hybris</name>
+        <url>https://www.hybris.com/</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>Apache License Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>agabrys</id>
+            <name>Adam Gabrys</name>
+            <url>http://www.adam.gabrys.biz/</url>
+            <organization>SAP Hybris</organization>
+            <organizationUrl>https://www.hybris.com/</organizationUrl>
+            <timezone>Europe/Warsaw</timezone>
+        </developer>
+        <developer>
+            <id>mlipka</id>
+            <name>Michal Lipka</name>
+            <organization>SAP Hybris</organization>
+            <organizationUrl>https://www.hybris.com/</organizationUrl>
+            <timezone>Europe/Warsaw</timezone>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/SAPHybrisGliwice/java-tdd-labs.git</connection>
+        <developerConnection>scm:git:git@github.com:SAPHybrisGliwice/java-tdd-labs.git</developerConnection>
+        <url>https://github.com/SAPHybrisGliwice/java-tdd-labs</url>
+    </scm>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/SAPHybrisGliwice/java-tdd-labs/issues</url>
+    </issueManagement>
+    <ciManagement>
+        <system>travis</system>
+        <url>https://travis-ci.org/SAPHybrisGliwice/java-tdd-labs</url>
+    </ciManagement>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-jxr-plugin</artifactId>
+                    <configuration>
+                        <linkJavadoc>false</linkJavadoc>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.6</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>0.7.9</version>
+                    <configuration>
+                        <rules>
+                            <rule>
+                                <element>CLASS</element>
+                                <excludes>
+                                    <exclude>*Test</exclude>
+                                </excludes>
+                            </rule>
+                        </rules>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.9</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>cim</report>
+                            <report>dependencies</report>
+                            <report>issue-tracking</report>
+                            <report>license</report>
+                            <report>scm</report>
+                            <report>summary</report>
+                            <report>project-team</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>jxr</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>report</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>
+</project>

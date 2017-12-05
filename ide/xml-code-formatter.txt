@@ -1,0 +1,9 @@
+Line width: 120
+Split multiple attributes each on a new line: false
+Align final bracket in multi-line element tags: false
+Preserve whitespace in tags with PCDATA content: false
+Clear all blank lines: false
+Format comments: true
+	Join lines: true
+Insert whitespace before closing empty end-tags: true
+Indent using spaces: 4

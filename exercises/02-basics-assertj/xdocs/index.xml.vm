@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <properties>
+        <title>Introduction</title>
+    </properties>
+
+    <body>
+        <section name="Introduction">
+            <p>
+                AssertJ core is a Java library that provides a fluent interface for writing assertions.
+                Its main goal is to improve test code readability and make maintenance of tests easier.
+            </p>
+            <p>
+                During this workshop you will use AssertJ 3.X.
+            </p>
+            <p>
+                For more information, please visit:
+            </p>
+            <ul>
+                <li><a href="https://joel-costigliola.github.io/assertj/index.html">AssertJ</a></li>
+                <li><a href="https://joel-costigliola.github.io/assertj/assertj-core-quick-start.html">One minute starting guide</a></li>
+            </ul>
+        </section>
+        <section name="Exercise">
+            <p>
+            	In this part of the workshop you will refactor and extends tests of <code>InMemoryBookRepositoryTest</code> class.
+            	You will change some JUnit assertions to fluent assertions and also add new ones.
+            	You should start by opening the <code>InMemoryBookRepositoryTest.java</code> file.
+            </p>
+        </section>
+        <section name="AssertJ Basics">
+            <p>
+                AssertJ provides <code>org.assertj.core.api.Assertions</code> class which defines <code>assertThat</code> method.
+                It allows you to get list of all available assertions for the tested object. Bellow is a list of the equivalent
+                verification conditions. You can see that AssertJ assertions are much more concise for complex operations than
+                JUnit assertions.
+            </p>
+            <table>
+                <tr>
+                    <th>JUnit (<code>Assert</code>)</th>
+                    <th>AssertJ (<code>Assertions</code>)</th>
+                </tr>
+                <tr>
+                    <td><pre>assertNotNull(obj);</pre></td>
+                    <td><pre>assertThat(obj).isNotNull();</pre></td>
+                </tr>
+                <tr>
+                    <td><pre>assertTrue(bool);</pre></td>
+                    <td><pre>assertThat(bool).isTrue();</pre></td>
+                </tr>
+                <tr>
+                    <td><pre>assertNotNull(collection);
+assertEquals(2, collection.size());</pre></td>
+                    <td><pre>assertThat(collection).hasSize(2);</pre></td>
+                </tr>
+                <tr>
+                    <td><pre>assertNotNull(collection);
+assertEquals(2, collection.size());
+assertTrue(collection.contains(obj1));
+assertTrue(collection.contains(obj2));</pre></td>
+                    <td><pre>assertThat(collection).containsExactly(obj1, obj2);</pre></td>
+                </tr>
+            </table>
+        </section>
+    </body>
+</document>

@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Getting Started: Serving Web Content</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+		  integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"/>
+</head>
+<body>
+<div class="container">
+	<table class="table">
+		<thead>
+		<tr>
+			<th>Number</th>
+			<th>Name</th>
+			<th>Price</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr th:each="prod,iter: ${productsInCart}">
+			<form action="#" th:action="@{/cart/remove}" th:object="${index}" method="post">
+				<td th:text="${iter.index}"></td>
+				<td th:text="${prod.name}">Oranges</td>
+				<td th:text="${#numbers.formatDecimal(prod.price, 1, 2)}">0.99</td>
+				<td>
+					<input type="hidden" th:value="${iter.index}" name="index"/>
+					<button type="submit">
+						<i>Remove</i>
+					</button>
+				</td>
+			</form>
+		</tr>
+		<tfoot>
+		<tr>
+			<td>Sum</td>
+			<td th:text="${sum}"></td>
+		</tr>
+		</tfoot>
+		</tbody>
+	</table>
+
+	<form action="#" th:action="@{/cart/calculate}" th:object="${calculationContext}" method="post">
+		<div class="form-check checkbox">
+			<label class="form-check-label"><input class="form-check-input" type="checkbox" th:field="*{secondForHalf}"/>Second for half</label>
+		</div>
+		<div class="form-check checkbox">
+			<label class="form-check-label"><input type="checkbox" class="form-check-input" th:field="*{thirdForFree}"/>Third for free</label>
+		</div>
+		<div>
+			<button type="submit">
+				<i>Recalculate</i>
+			</button>
+		</div>
+	</form>
+
+	<a href="/products">Go to products</a>
+</div>
+</body>
+</html>

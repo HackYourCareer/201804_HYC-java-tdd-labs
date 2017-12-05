@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/DECORATION/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
+
+    <bannerLeft>
+        <name>${projectName}</name>
+    </bannerLeft>
+
+    <skin>
+        <groupId>org.apache.maven.skins</groupId>
+        <artifactId>maven-fluido-skin</artifactId>
+        <version>1.6</version>
+    </skin>
+    <custom>
+        <fluidoSkin>
+            <gitHub>
+                <projectId>SAPHybrisGliwice/java-tdd-labs</projectId>
+                <ribbonColor>gray</ribbonColor>
+                <ribbonOrientation>right</ribbonOrientation>
+            </gitHub>
+        </fluidoSkin>
+    </custom>
+
+    <poweredBy>
+        <logo name="GitHub" href="https://github.com/SAPHybrisGliwice/java-tdd-labs" img="images/logos/github.png" />
+        <logo name="Built by Maven" img="images/logos/maven-feather.png" />
+    </poweredBy>
+
+    <body>
+        <menu name="Overview">
+            <item name="Introduction" href="index.html" />
+            <item name="FAQ" href="faq.html" />
+        </menu>
+
+        <menu ref="reports" />
+    </body>
+</project>

@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Getting Started: Serving Web Content</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+		  integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"/>
+</head>
+<body>
+<div class="container">
+	<table class="table">
+		<thead>
+		<tr>
+			<th>Name</th>
+			<th>Price</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr th:each="prod: ${products}">
+			<form action="#" th:action="@{/cart}" th:object="${productToAdd}" method="post">
+				<td th:text="${prod.name}"></td>
+				<td th:text="${#numbers.formatDecimal(prod.price, 1, 2)}"></td>
+				<td>
+					<input type="hidden" th:value="${prod.name}" name="name"/>
+					<button type="submit">
+						<i>Add</i>
+					</button>
+				</td>
+			</form>
+		</tr>
+		</tbody>
+	</table>
+
+	<a href="/cart">Go to cart</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <properties>
+        <title>Introduction</title>
+    </properties>
+
+    <body>
+        <section name="Introduction">
+            <p>In this exercise you will develop a web application. We will use:</p>
+            <ul>
+                <li>Spring Framework</li>
+                <li>Spring Boot</li>
+                <li>Spring MVC</li>
+                <li>Thymeleaf</li>
+            </ul>
+            <p>
+                All of this technologies are briefly described in the sections below. If you need more information:
+                <a href="https://spring.io/projects">Spring</a> and for quick start go and see
+                <a href="https://spring.io/guides">Spring guides</a>.
+            </p>
+        </section>
+        <section name="Exercise">
+            <p>In this exercise you will develop a simple shop that will allow:</p>
+            <ul>
+                <li>list all available products</li>
+                <li>add/remove product to cart</li>
+                <li>calculate the price, considering different promotions</li>
+            </ul>
+            <p>UI team designed two views for us:</p>
+            <ul>
+                <li>All products - you can see all available products and can add selected to cart</li>
+                <li>
+                    My cart - you can see all products in your cart and also can remove some of them. In this view you
+                    can also choose promotions and then calculate the value of the cart according to the selected
+                    promotion
+                </li>
+            </ul>
+            <p>
+                Views have already bean implemented. We just need to test, if all necessary values, are transfered
+                to/from controller.
+            </p>
+            <table>
+                <tr>
+                    <th>Endpoint</th>
+                    <th>Parameters</th>
+                </tr>
+                <tr>
+                    <td>GET /products</td>
+                    <td>'products' - List of all products</td>
+                </tr>
+                <tr>
+                    <td>GET /cart</td>
+                    <td>
+                        'productsInCart' - List all products in cart<br/>
+                        'sum' - total price of products in cart<br/>
+                        'calculationContext' - context use to calculate sum, it tells us about promotion
+                    </td>
+                </tr>
+                <tr>
+                    <td>POST /cart</td>
+                    <td>'name' - name of product</td>
+                </tr>
+                <tr>
+                    <td>POST /cart/remove</td>
+                    <td>'index' - number of product in cart, start from 0</td>
+                </tr>
+                <tr>
+                    <td>POST /cart/calculate</td>
+                    <td>
+                        'secondForHalf' - if set to <code>true</code> indicate that we use this promotion
+                        (it is part of calculationContext)<br/>
+                        'thirdForFree' - if set to <code>true</code> indicate that we use this promotion
+                        (it is part of calculationContext)
+                    </td>
+                </tr>
+            </table>
+            <h3>Testing controler</h3>
+            <p>
+                At this point the controller has only a skeleton methods. We need them to UI work properly.
+                If you notice something that does not work, please feel free to correct it.
+            </p>
+            <p>
+                We will start by testing whether the controller is working properly. In a standalone mode,
+                we will send requests to check if all required parameters are properly supported.
+            </p>
+            <h3>Add business logic to our controller</h3>
+            <p>Next, we start developing all functionality, so write test to get all products.</p>
+            <ul>
+                <li>
+                    Right now we get two of them: beer and wine. Check if all of theme was returned. Test should
+                    fail. Then go and implement what you need to test pass
+                </li>
+                <li>Next add test to check if you can add something to your cart</li>
+                <li>And what when you try add product that is not in our list?</li>
+                <li>If you add more products are total price recalculated?</li>
+                <li>
+                    What about promotions? Is a price calculated properly? Maybe it is a good idea to write
+                    separate test case to check only the calculated promotions?
+                </li>
+                <li>
+                    Now let's remove something from our cart. What happened? Is price correctly calculated? With
+                    all promotions?
+                </li>
+                <li>And what with wrong product index?</li>
+                <li>Any other ideas?</li>
+            </ul>
+        </section>
+        <section name="Spring Framework">
+            <p>
+                Spring is a framework for simple and fast building of powerful applications. It has many features
+                but we will use only few of them.
+            </p>
+            <h3>Bean injection</h3>
+            <p>
+                One of the most interesting features of the spring is the IOC container. It gives us the ability to
+                define beans, and then the container deals with the preparation and creation of such bean. We can
+                use <code>@Autowire</code> annotation to indicate how the given bean is to be constructed.
+            </p>
+            <p>
+                Suppose we want to build a <code>ProductController</code> which will use <code>PriceService</code>.
+            </p>
+            <pre>public class ProductController {
+
+    @Autowice
+    private PriceService priceService;
+
+    // rest of the class
+}
+</pre>
+            <p>
+                In example above container inject <code>PriceService</code> instance into <code>ProductController</code>.
+                User don't need to do it manually.
+            </p>
+            <h3>Spring MVC</h3>
+            <p>
+                Spring MVC is the web framework built on the Servlet API and included in the Spring Framework from the very
+                beginning. To make use of this framework we need to create controller. To do it we use annotation
+                <code>@Controller</code>. In controller we can create methods responsible for handling individual requests.
+                We use two annotations for this: <code>@GetMapping</code> and <code>@PostMapping</code>. In most cases,
+                the methods for GetMapping will add the returned parameters to the model. PostMapping method will receive data.
+                You can see example in <code>ProductController.java</code> file.
+            </p>
+            <p>
+                To render web page Spring MVC use one of view technologies. In our project we use Thymeleaf. This technology
+                assumes that method to handling request will return a name of the view which should be render. If you can see
+                example pages go to <code>resources/templates/cart.html</code> file.
+            </p>
+            <h4>How to test it?</h4>
+            <p>
+                Spring provides classes that help us test web requests. The <code>org.springframework.test.web.servlet.MockMvc</code>
+                class allows us to simulate such requests. In addition, it gives us the opportunity to check the status of such
+                request and obtain the object <code>org.springframework.test.web.servlet.MvcResult</code>. This class can be used
+                for additional assertions.
+            </p>
+            <pre>final MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/products"))
+    .andExpect(status().isOk())
+    .andReturn();
+
+assertThat(mvcResult.getModelAndView().getModel()).containsKeys("products");</pre>
+            <pre>final MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/cart").param("name", "wine"))
+    .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+    .andReturn();
+
+assertThat(mvcResult.getModelAndView().getViewName()).contains("products");
+</pre>
+           <h3>Spring Boot</h3>
+           <p>
+               Spring Boot is responsible for all this magic to work. It configure and start our container, create
+               beans, configure web context and much more.
+            </p>
+        </section>
+    </body>
+</document>
