@@ -1,0 +1,31 @@
+html {
+    margin: 0;
+    padding: 0;
+    background-image: url(hack_your_career.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+body {
+    margin: 0;
+    padding: 0;
+}
+section {
+    margin: 0 auto;
+    text-align: center;
+}
+ul {
+    line-height: 50px;
+    margin: 20px;
+    padding: 0;
+}
+li {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: inline;
+    padding: 10px;
+    margin: 5px;
+    white-space: nowrap;
+}
