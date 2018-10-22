@@ -14,7 +14,7 @@
     <custom>
         <fluidoSkin>
             <gitHub>
-                <projectId>SAPHybrisGliwice/java-tdd-labs</projectId>
+                <projectId>HackYourCareer/201804_HYC-java-tdd-labs</projectId>
                 <ribbonColor>gray</ribbonColor>
                 <ribbonOrientation>right</ribbonOrientation>
             </gitHub>
@@ -22,7 +22,7 @@
     </custom>
 
     <poweredBy>
-        <logo name="GitHub" href="https://github.com/SAPHybrisGliwice/java-tdd-labs" img="images/logos/github.png" />
+        <logo name="GitHub" href="https://github.com/HackYourCareer/201804_HYC-java-tdd-labs" img="images/logos/github.png" />
         <logo name="Built by Maven" img="images/logos/maven-feather.png" />
     </poweredBy>
 

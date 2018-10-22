@@ -11,4 +11,4 @@ script:
   - cd ../05-shop-web
   - mvn -e clean install site
 jdk:
-  - oraclejdk8
+  - openjdk8

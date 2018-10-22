@@ -8,12 +8,12 @@
     <version>1.0.0-SNAPSHOT</version>
     <name>JUnit Basics</name>
     <description>Teaches the usage of JUnit 4 test framework</description>
-    <url>${basedir}</url>
+    <url>https://hackyourcareer.github.io/201804_HYC-java-tdd-labs/</url>
 
     <inceptionYear>2017</inceptionYear>
     <organization>
-        <name>SAP Hybris</name>
-        <url>https://www.hybris.com/</url>
+        <name>SAP Customer Experience</name>
+        <url>https://cx.sap.com/</url>
     </organization>
 
     <licenses>
@@ -28,32 +28,32 @@
             <id>agabrys</id>
             <name>Adam Gabrys</name>
             <url>http://www.adam.gabrys.biz/</url>
-            <organization>SAP Hybris</organization>
-            <organizationUrl>https://www.hybris.com/</organizationUrl>
+            <organization>SAP Customer Experience</organization>
+            <organizationUrl>https://cx.sap.com/</organizationUrl>
             <timezone>Europe/Warsaw</timezone>
         </developer>
         <developer>
             <id>mlipka</id>
             <name>Michal Lipka</name>
-            <organization>SAP Hybris</organization>
-            <organizationUrl>https://www.hybris.com/</organizationUrl>
+            <organization>SAP Customer Experience</organization>
+            <organizationUrl>https://cx.sap.com/</organizationUrl>
             <timezone>Europe/Warsaw</timezone>
         </developer>
     </developers>
 
     <scm>
-        <connection>scm:git:git://github.com/SAPHybrisGliwice/java-tdd-labs.git</connection>
-        <developerConnection>scm:git:git@github.com:SAPHybrisGliwice/java-tdd-labs.git</developerConnection>
-        <url>https://github.com/SAPHybrisGliwice/java-tdd-labs</url>
+        <connection>scm:git:git://github.com/HackYourCareer/201804_HYC-java-tdd-labs.git</connection>
+        <developerConnection>scm:git:git@github.com:HackYourCareer/201804_HYC-java-tdd-labs.git</developerConnection>
+        <url>https://github.com/HackYourCareer/201804_HYC-java-tdd-labs</url>
     </scm>
 
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/SAPHybrisGliwice/java-tdd-labs/issues</url>
+        <url>https://github.com/HackYourCareer/201804_HYC-java-tdd-labs/issues</url>
     </issueManagement>
     <ciManagement>
         <system>travis</system>
-        <url>https://travis-ci.org/SAPHybrisGliwice/java-tdd-labs</url>
+        <url>https://travis-ci.org/HackYourCareer/201804_HYC-java-tdd-labs</url>
     </ciManagement>
 
     <properties>
